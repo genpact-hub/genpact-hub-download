@@ -79,21 +79,6 @@
         font-size: 12px;
         color: #aaa;
     }
-
-    @media (max-width: 400px) {
-        .container {
-            padding: 20px 15px;
-        }
-
-        h1 {
-            font-size: 18px;
-        }
-
-        .download-btn {
-            font-size: 14px;
-            padding: 12px;
-        }
-    }
 </style>
 </head>
 
@@ -107,17 +92,56 @@
 
     <h1>Genpact Hub</h1>
 
-    <p>Download the official Android APK for Genpact Hub.</p>
+    <p>
+        Download the official Android APK for Genpact Hub.
+        Access internal tools and enterprise resources securely.
+    </p>
 
-    <a href="#" class="download-btn">
+    <a id="downloadBtn" href="#" class="download-btn">
         Download Android APK
     </a>
 
-    <div class="version">
-        Version 21.x.x | Updated April 2026
+    <div id="versionInfo" class="version">
+        Version 1.0.0 | Updated March 2026
     </div>
 
+    <footer>
+        © 2026 Genpact. All Rights Reserved.
+    </footer>
+
 </div>
+
+<script>
+    var params = new URLSearchParams(window.location.search);
+
+    var apkLink = params.get("apk");
+    var version = params.get("version");
+    var date = params.get("date");
+
+    var defaultApk = "genpact-hub.apk";
+    var defaultVersion = "1.0.0";
+    var defaultDate = "March 2026";
+
+    var downloadBtn = document.getElementById("downloadBtn");
+    var versionInfo = document.getElementById("versionInfo");
+
+    if (apkLink && apkLink.trim() !== "") {
+        downloadBtn.href = decodeURIComponent(apkLink);
+    } else {
+        downloadBtn.href = defaultApk;
+    }
+   
+    if (!version || version.trim() === "") {
+        version = defaultVersion;
+    }
+
+    if (!date || date.trim() === "") {
+        date = defaultDate;
+    }
+
+    versionInfo.innerHTML = "Version " + version + " | Updated " + date;
+
+</script>
 
 </body>
 </html>
